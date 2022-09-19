@@ -1,0 +1,5 @@
+export {Blog} from './Blog'
+export {Login} from './Login'
+export {Register} from './Register'
+export {NewPost} from './NewPost'
+export {PostPage} from './PostPage'

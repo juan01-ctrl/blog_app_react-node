@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0d0b4219.css",
+    "main.js": "/static/js/main.ca55dabb.js",
+    "static/media/logo-wortise.png": "/static/media/logo-wortise.d1eb0cf60c9c8dd64ea6.png",
+    "index.html": "/index.html",
+    "main.0d0b4219.css.map": "/static/css/main.0d0b4219.css.map",
+    "main.ca55dabb.js.map": "/static/js/main.ca55dabb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d0b4219.css",
+    "static/js/main.ca55dabb.js"
+  ]
+}
