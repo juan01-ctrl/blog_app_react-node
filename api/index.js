@@ -41,10 +41,10 @@ app.use("/api/posts", postRoute)
 app.use("/api/categories", categoryRoute)
 
 // Web Server
-app.use(express.static('public'))
-app.get('*',(req,res)=>{
-    res.sendFile(__dirname + '/public/index.html')
-})
+// app.use(express.static('public'))
+// app.get('*',(req,res)=>{
+//     res.sendFile(__dirname + '/public/index.html')
+// })
 
 
 app.listen("8080",()=>{

@@ -33,7 +33,7 @@ min-height:7rem;
 
 `
 export const CardInfo = styled.h5`
-font-size:${({dark})=> dark ? '1em ': '.5em'};
+font-size:${({dark})=> dark ? '1em ': '.8em'};
 color:${({dark})=> dark ? "#38403f" : "#b3b3b3"}
 `
 export const CardDescription = styled.p`
@@ -41,7 +41,7 @@ margin:.5em 0 0;
 color:#0c0d0c;
 overflow-wrap:break-word;
 white-space: pre-line;
-
+font-size:1.2em;
 `
 
 export const CardCategory = styled.span`

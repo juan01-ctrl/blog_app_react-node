@@ -15,7 +15,7 @@ export const PostImage = styled.img`
   margin-bottom: 2em;
 `;
 export const PostTitle = styled.h1`
-  font-size: 6em;
+  font-size: 4.5em;
   display: inline;
   overflow-wrap: break-word;
 `;

@@ -38,7 +38,8 @@ margin-bottom:.3em;
 
 export const FormTextArea = styled.textarea`
 resize:none;
-height:8em;
+min-height:8em;
+
 font-size:1.8em;
 margin:.5em 0;
 opacity:${({opacity})=> opacity? ".7":"1"}

@@ -27,12 +27,12 @@ const Post = () => {
 
   const ImgFolder = "http://localhost:8080/images/";
 
+  //STATES
   const [post, setPost] = useState<IPost>();
   const [desc, setDesc] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [updateError, setUpdateError] = useState<string>("");
-
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -41,7 +41,9 @@ const Post = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_BASE_URL +`/posts/${postId}`);
+      const { data } = await axios.get(
+        process.env.REACT_APP_BASE_URL + `/posts/${postId}`
+      );
       setPost(data);
       setDesc(data.desc);
       setTitle(data.title);
@@ -66,9 +68,12 @@ const Post = () => {
       },
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(process.env.REACT_APP_BASE_URL +`/posts/${postId}`, {
-          data: { username: user?.username },
-        });
+        await axios.delete(
+          process.env.REACT_APP_BASE_URL + `/posts/${postId}`,
+          {
+            data: { username: user?.username },
+          }
+        );
         navigate("/");
         Swal.fire("Post deleted!", "", "success");
       } else if (result.isDenied) {
@@ -77,25 +82,26 @@ const Post = () => {
     });
   };
 
+  // HANDLE UPDATE
   const handleUpdate = async () => {
-    setUpdateError("")
-    if(!desc?.trim().length || !title?.trim().length){
-      setUpdateError("Complete all fields!")
-      return
+    setUpdateError("");
+    if (!desc?.trim().length || !title?.trim().length) {
+      setUpdateError("Complete all fields!");
+      return;
     }
-    if(desc.length < 120){
-      setUpdateError("the content is too short!")
-      return
+    if (desc.length < 120) {
+      setUpdateError("the content is too short!");
+      return;
     }
-    if(title.length < 5){
-      setUpdateError("the title is too short!")
-      return
+    if (title.length < 5) {
+      setUpdateError("the title is too short!");
+      return;
     }
     try {
-      await axios.put(process.env.REACT_APP_BASE_URL +`/posts/${post?._id}`, {
+      await axios.put(process.env.REACT_APP_BASE_URL + `/posts/${post?._id}`, {
         data: { username: user?.username, title, desc },
       });
-      setIsEditing(false)
+      setIsEditing(false);
     } catch (err) {
       console.error(err);
     }
@@ -104,23 +110,45 @@ const Post = () => {
   return (
     <section className="section">
       <PostContainer>
-        <BackArrow/>
+        <BackArrow />
         {!post ? (
-          <Loader/>
+          <Loader />
         ) : (
           <>
             {post.photo && (
               <PostImage src={ImgFolder + post.photo} alt={post.title} />
             )}
             <PostInfoContainer>
-              {
-                post.categories.length > 0 &&
-              <div>
-              <PostInfo style={{display:"inline"}} dark={true}>Categories: </PostInfo>
-                {post.categories?.map((cat,idx)=>(
-                <PostInfo key={idx} style={{display:"inline"}}> {cat}{(idx !== post.categories.length - 1) ? "," : "." }</PostInfo>
-              ))}</div>
-              }
+              {post.categories.length > 0 && (
+                <div>
+                  {user?.username === post.username && !isEditing && (
+                    <SettingsPost>
+                      <BiEdit
+                        cursor="pointer"
+                        size="3em"
+                        color="#2a5280"
+                        onClick={() => setIsEditing((prev) => !prev)}
+                      />
+                      <MdDeleteOutline
+                        cursor="pointer"
+                        size="3em"
+                        color="#ab1111"
+                        onClick={deletePost}
+                      />
+                    </SettingsPost>
+                  )}
+                  <PostInfo style={{ display: "inline" }} dark={true}>
+                    Categories:{" "}
+                  </PostInfo>
+                  {post.categories?.map((cat, idx) => (
+                    <PostInfo key={idx} style={{ display: "inline" }}>
+                      {" "}
+                      {cat}
+                      {idx !== post.categories.length - 1 ? "," : "."}
+                    </PostInfo>
+                  ))}
+                </div>
+              )}
               {isEditing ? (
                 <FormInputText
                   value={title}
@@ -130,27 +158,13 @@ const Post = () => {
                   opacity={true}
                 />
               ) : (
-                <PostTitle>{title}</PostTitle>
-              )}
-              {user?.username === post.username && !isEditing && (
-                <SettingsPost>
-                  <BiEdit
-                    cursor="pointer"
-                    size="3em"
-                    color="#2a5280"
-                    onClick={() => setIsEditing((prev) => !prev)}
-                  />
-                  <MdDeleteOutline
-                    cursor="pointer"
-                    size="3em"
-                    color="#ab1111"
-                    onClick={deletePost}
-                  />
-                </SettingsPost>
+                <div style={{ marginBottom: "2em" }}>
+                  <PostTitle>{title}</PostTitle>
+                </div>
               )}
 
               <Link to={`/?username=${post.username}`}>
-                <PostInfo dark={true} style={{opacity:".8" }}>
+                <PostInfo dark={true} style={{ opacity: ".8" }}>
                   <span>Author:</span> {post.username}
                 </PostInfo>
               </Link>
@@ -165,14 +179,15 @@ const Post = () => {
                   setDesc(e.target.value)
                 }
                 opacity={true}
-                
               />
             ) : (
               <PostDescription>{desc}</PostDescription>
             )}
           </>
         )}
-        {updateError && <h4 style={{margin:".5em",fontSize:"1.2em"}}>{updateError}</h4>}
+        {updateError && (
+          <h4 style={{ margin: ".5em", fontSize: "1.2em" }}>{updateError}</h4>
+        )}
         {isEditing && <MainButton onClick={handleUpdate} text="Update" />}
       </PostContainer>
     </section>

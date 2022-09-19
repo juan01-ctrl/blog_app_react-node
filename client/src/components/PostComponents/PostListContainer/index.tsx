@@ -79,7 +79,7 @@ const PostListContainer: FC<Props> = ({ posts, isLoading }) => {
   };
 
   const filterByTitle = () =>
-    posts?.filter((post) => post.title.includes(search));
+    posts?.filter((post) => post.title.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <section

@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import Nav from "./components/Nav";
+import Footer from './components/Footer/index';
+
 import { Blog, PostPage, NewPost, Login, Register } from "./views";
 import { AuthContext } from './context/Context';
-
 function App() {
   const {state:{user}} = useContext(AuthContext)
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/createpost" element={isAuth ?<NewPost/> : <Login />} />
           <Route path="/post/:postId" element={isAuth ?<PostPage />: <Login />} />
         </Routes>
+        {isAuth && <Footer/>}
         </AnimatePresence>
       </BrowserRouter>
     </>
