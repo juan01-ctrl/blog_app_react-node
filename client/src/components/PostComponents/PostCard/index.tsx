@@ -34,6 +34,7 @@ const PostCard: FC<Props> = ({
                 display: "inline",
               }}
             >
+              
               Categories:
             </h6>
             {categories.map((category, idx) => {
@@ -47,7 +48,7 @@ const PostCard: FC<Props> = ({
         <CardInfo dark={true}><span style={{opacity:".8"}}>Author:</span> {username}</CardInfo>
         <CardInfo>Date: {new Date(createdAt).toDateString()}</CardInfo>
         <hr />
-        <CardTitle>{title}</CardTitle>
+        <CardTitle>{title.length > 19 ? title.substring(0,20) : title}</CardTitle>
         <CardDescription>{desc.substring(0,40)}...</CardDescription>
       </CardContent>
     </Card>
