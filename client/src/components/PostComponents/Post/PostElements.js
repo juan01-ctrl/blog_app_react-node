@@ -34,5 +34,5 @@ export const PostDescription = styled.p`
 font-size:1.7em;
 margin:.8em 0 1.4em;
 overflow-wrap:break-word;
-
+white-space:pre-inline;
 `

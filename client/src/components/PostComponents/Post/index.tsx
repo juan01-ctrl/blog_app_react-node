@@ -83,12 +83,12 @@ const Post = () => {
       setUpdateError("Complete all fields!")
       return
     }
-    if(desc.length < 60){
+    if(desc.length < 120){
       setUpdateError("the content is too short!")
       return
     }
-    if(title.length > 30){
-      setUpdateError("the title is too long!")
+    if(title.length < 5){
+      setUpdateError("the title is too short!")
       return
     }
     try {
