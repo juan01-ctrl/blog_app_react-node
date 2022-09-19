@@ -45,7 +45,6 @@ const PostForm = () => {
   const [form, setForm] = useState(INITIAL_FORM);
   const [updateError, setUpdateError] = useState<string>("");
 
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name !== "photo") {
       setForm({
@@ -61,33 +60,35 @@ const PostForm = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setUpdateError("")
-    if(!form.content?.trim().length || !form.title?.trim().length){
-      setUpdateError("Complete all fields!")
-      return
+    e.preventDefault();
+    setUpdateError("");
+    if (!form.content?.trim().length || !form.title?.trim().length) {
+      setUpdateError("Complete all fields!");
+      return;
     }
-    if(form.content.length < 70){
-      setUpdateError("the content is too short!")
-      return
+    if (form.content.length < 70) {
+      setUpdateError("the content is too short!");
+      return;
     }
-    if(form.title.length < 5){
-      setUpdateError("the title is too short!")
-      return
+    if (form.title.length < 5) {
+      setUpdateError("the title is too short!");
+      return;
     }
-   
+
     const newPost: PostType = {
       title: form.title,
       desc: form.content,
       username: user!.username,
     };
 
-
     if (form.categories) {
       const categories = form.categories.split(" ");
       newPost.categories = categories;
       try {
-        await axios.post(process.env.REACT_APP_BASE_URL +"/categories", categories);
+        await axios.post(
+          process.env.REACT_APP_BASE_URL + "/categories",
+          categories
+        );
       } catch (err) {
         console.log(err);
       }
@@ -101,15 +102,18 @@ const PostForm = () => {
       data.append("file", form.photo);
       newPost.photo = filename;
       try {
-        await axios.post(process.env.REACT_APP_BASE_URL +"/upload", data);
+        await axios.post(process.env.REACT_APP_BASE_URL + "/upload", data);
       } catch (err) {
         console.error(err);
       }
     }
 
     try {
-      const { data } = await axios.post(process.env.REACT_APP_BASE_URL +"/posts", newPost);
-      
+      const { data } = await axios.post(
+        process.env.REACT_APP_BASE_URL + "/posts",
+        newPost
+      );
+
       navigate(`/post/${data._id}`);
     } catch (err) {
       console.error(err);
@@ -136,7 +140,6 @@ const PostForm = () => {
             placeholder="Post Title*"
             onChange={handleChange}
             required
-
           />
           <FormTextArea
             name="content"
@@ -156,7 +159,9 @@ const PostForm = () => {
             />
           </div>
         </FormFieldsContainer>
-        {updateError && <h4 style={{margin:".5em",fontSize:"1.2em"}}>{updateError}</h4>}
+        {updateError && (
+          <h4 style={{ margin: ".5em", fontSize: "1.2em" }}>{updateError}</h4>
+        )}
 
         <MainButton type="submit" text="Publish" />
       </Form>

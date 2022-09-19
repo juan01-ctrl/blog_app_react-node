@@ -40,6 +40,7 @@ export const CardDescription = styled.p`
 margin:.5em 0 0;
 color:#0c0d0c;
 overflow-wrap:break-word;
+white-space: pre-line;
 
 `
 
