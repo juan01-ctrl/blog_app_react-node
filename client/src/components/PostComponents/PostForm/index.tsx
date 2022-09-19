@@ -67,11 +67,11 @@ const PostForm = () => {
       setUpdateError("Complete all fields!")
       return
     }
-    if(form.content.length < 60){
+    if(form.content.length < 100){
       setUpdateError("the content is too short!")
       return
     }
-    if(form.title.length > 30){
+    if(form.title.length > 50){
       setUpdateError("the title is too long!")
       return
     }

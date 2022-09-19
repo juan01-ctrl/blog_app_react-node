@@ -48,7 +48,7 @@ const PostCard: FC<Props> = ({
         <CardInfo>Date: {new Date(createdAt).toDateString()}</CardInfo>
         <hr />
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{desc}</CardDescription>
+        <CardDescription>{desc.substring(0,40)}...</CardDescription>
       </CardContent>
     </Card>
     </Link>
