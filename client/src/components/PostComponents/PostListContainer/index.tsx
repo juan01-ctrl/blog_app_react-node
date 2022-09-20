@@ -79,7 +79,9 @@ const PostListContainer: FC<Props> = ({ posts, isLoading }) => {
   };
 
   const filterByTitle = () =>
-    posts?.filter((post) => post.title.toLowerCase().includes(search.toLowerCase()));
+    posts?.filter((post) =>
+      post.title.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <section
@@ -87,6 +89,7 @@ const PostListContainer: FC<Props> = ({ posts, isLoading }) => {
       style={{
         background:
           "radial-gradient(circle, rgba(35,108,180,0.7763480392156863) 0%, rgba(53,53,61,0.7679446778711485) 100%)",
+        padding: "4em 0",
       }}
     >
       <PostListTitle>Our Posts:</PostListTitle>
